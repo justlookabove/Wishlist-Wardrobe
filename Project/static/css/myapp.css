@@ -2,3 +2,15 @@
 .colorful {
   color: #bb8833;
 }
+
+#top {
+    background-color: #000000;
+    padding: 25px;
+    position: relative;
+}
+
+#Logo {
+    padding: 5px;
+    position: absolute;
+    bottom: 20%;
+}
