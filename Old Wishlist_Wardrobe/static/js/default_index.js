@@ -19,8 +19,7 @@ var app = function() {
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
-            picture:"",
-            test:"test text",
+            picture:""
         },
         methods: {
         }
@@ -30,6 +29,8 @@ var app = function() {
 
     return self;
 };
+
+
 
 var APP = null;
 

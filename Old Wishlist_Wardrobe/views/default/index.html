@@ -1,5 +1,8 @@
 {{extend 'layout.html'}}
 
+<!-- Linking to myapp.css 
+<link href="static/css/myapp.css" rel="stylesheet" type="text/css"/>
+-->
 <style type="text/css">
 	
 .position {
@@ -19,23 +22,18 @@
         </div>
     </div>
     <br>
-
-<!-- Picture Box w/ Input -->
-<div id="vue-div">
+<div class="container">
     <div>
         <div class="border">
             <input v-model="picture" type="text" name="imageUrl"/>
         </div>
     </div>
     <br>
-    <div v-if="picture != '' " class="boxed">
-  		<img v-bind:src="picture" height="150px" width="150px"/>
+    ${picture}
+    <div class="boxed">
+  		<img src="https://anf.scene7.com/is/image/anf/KIC_332-8513-0998-530_prod1?$product-hol-v1$&wid=800&hei=1000" height="100px"/>
 	</div>
-	<div v-if="picture == '' " class="boxed">
-		<img height="100px" width="100%"/>
-	</div>
-</div
-
+</div>
 </body>
 
  
@@ -45,7 +43,3 @@
 <script src="{{=URL('static', 'js/default_index.js')}}"
 
 
-
-
-{{block head}}
-{{end}}
