@@ -13,6 +13,10 @@ var app = function() {
         }
     };
 
+    self.enter_url = function () {
+        window.open(self.vue.url, target='_blank');
+    }
+
     // Complete as needed.
     self.vue = new Vue({
         el: "#vue-div",
@@ -20,9 +24,11 @@ var app = function() {
         unsafeDelimiters: ['!{', '}'],
         data: {
             picture:"",
+            url:"",
             test:"test text",
         },
         methods: {
+            enter_url: self.enter_url,
         }
 
     });

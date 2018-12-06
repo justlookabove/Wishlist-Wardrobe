@@ -4,6 +4,9 @@
 	
 .position {
 	display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 20px;
+    padding-left: 10px;
 }
 
 </style>
@@ -21,20 +24,54 @@
     <br>
 
 <!-- Picture Box w/ Input -->
-<div id="vue-div">
+<div class="position" id="vue-div">
     <div>
+        <!-- For Image Url -->
+        <div>
+            <p><small>Enter Image Url</small></p>
+            <div class="border">
+                <input v-model="picture" type="text" name="imageUrl" size="20"/>
+            </div>
+            <br>
+            <button>enter</button>
+        </div>
+        <br>
+
+        <!-- For Page Url -->
+        <div>
+            <p><small>Enter Page Url</small></p>
+            <div class="border">
+                <input v-model="url" type="text" name="pageUrl"/>
+            </div>
+            <br>
+            <button v-on:click="enter_url">enter</button>
+        </div>
+
+        <!-- Enter Item Name -->
+        <br>
         <div class="border">
-            <input v-model="picture" type="text" name="imageUrl"/>
+            <textarea>Enter Item Name</textarea>
+        </div>
+
+        <!-- Enter Item Price-->
+        <br>
+        <div class="border">
+            <textarea>Ente Item Price</textarea>
         </div>
     </div>
-    <br>
-    <div v-if="picture != '' " class="boxed">
-  		<img v-bind:src="picture" height="150px" width="150px"/>
-	</div>
-	<div v-if="picture == '' " class="boxed">
-		<img height="100px" width="100%"/>
-	</div>
-</div
+
+    <!-- Displays image onto box -->
+    <div>
+        <div v-if="picture != '' " class="boxed">
+            <img v-bind:src="picture" height="150px" width="150px"/>
+        </div>
+        <div v-if="picture == '' " class="boxed">
+            <img height="100px" width="100%"/>
+        </div>
+    </div>
+
+
+</div>
 
 </body>
 
@@ -45,7 +82,7 @@
 <script src="{{=URL('static', 'js/default_index.js')}}"
 
 
-
-
 {{block head}}
 {{end}}
+
+

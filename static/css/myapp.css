@@ -17,13 +17,13 @@
 
 /* Example from https://stackoverflow.com/questions/32710982/how-to-set-the-border-per-side-for-an-input-box */
 .border{
-	border: 1px solid black;
+	border: 1.5px solid black;
 	width: 300px;
 
 }
 
 .boxed {
-  border: 1px solid black ;
+  border: 1.5px solid black ;
   width: 160px;
   height: 160px;
   align-self: center;
