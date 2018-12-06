@@ -13,6 +13,7 @@ var app = function() {
         }
     };
 
+    /* Function to load enterd Page Url to a new tab */
     self.enter_url = function () {
         window.open(self.vue.url, target='_blank');
     }
@@ -24,11 +25,11 @@ var app = function() {
         unsafeDelimiters: ['!{', '}'],
         data: {
             picture:"",
-            url:"",
+            url:"", // For Page Url button 
             test:"test text",
         },
         methods: {
-            enter_url: self.enter_url,
+            enter_url: self.enter_url, // For Page Url button
         }
 
     });
