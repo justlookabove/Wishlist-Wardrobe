@@ -7,6 +7,12 @@
     grid-template-columns: repeat(5, 1fr);
     grid-column-gap: 20px;
     padding-left: 10px;
+    height: 100%;
+}
+
+.buttonTop {
+  margin-top: 10px;
+  display: inline-block;
 }
 
 </style>
@@ -29,45 +35,41 @@
         <!-- For Image Url -->
         <div>
             <p><small>Enter Image Url</small></p>
-            <div class="border">
-                <input v-model="picture" type="text" name="imageUrl" size="20"/>
-            </div>
-            <br>
-            <button>enter</button>
+            <input class="border" v-model="picture" type="text" name="imageUrl"/>
+            <br>  
         </div>
         <br>
 
         <!-- For Page Url -->
         <div>
             <p><small>Enter Page Url</small></p>
-            <div class="border">
-                <input v-model="url" type="text" name="pageUrl"/>
-            </div>
+            <input class="border" v-model="url" type="text" name="pageUrl"/>
             <br>
-            <button v-on:click="enter_url">enter</button>
         </div>
+        <br>
 
         <!-- Enter Item Name -->
-        <br>
-        <div class="border">
-            <textarea>Enter Item Name</textarea>
+        <div >
+            <p><small>Enter Item Name</small></p>
+            <textarea class="border"></textarea>
         </div>
         <br>
-        <button>enter</button>
 
         <!-- Enter Item Price-->
-        <br>
-        <div class="border">
-            <textarea>Enter Item Price</textarea>
+        <div>
+            <p><small>Enter Item Price</small></p>
+            <textarea class="border"></textarea>
         </div>
-        <br>
-        <button>enter</button>
+
+        <!-- To save all items / Show Webpage-->
+        <button class="buttonTop">Save</button>
+        <button class="buttonTop" v-on:click="enter_url">Show Webpage</button>
     </div>
 
     <!-- Displays image onto box -->
     <div>
         <div v-if="picture != '' " class="boxed">
-            <img v-bind:src="picture" height="150px" width="150px"/>
+            <img v-bind:src="picture" height="275px" width="220px"/>
         </div>
         <div v-if="picture == '' " class="boxed">
             <img height="100px" width="100%"/>

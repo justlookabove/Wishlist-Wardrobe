@@ -1,4 +1,9 @@
 /* line 1, ../sass/_main.scss */
+body, html {
+  height: 100%;
+  background-color: white;
+}
+
 .colorful {
   color: #bb8833;
 }
@@ -17,14 +22,26 @@
 
 /* Example from https://stackoverflow.com/questions/32710982/how-to-set-the-border-per-side-for-an-input-box */
 .border{
-	border: 1.5px solid black;
-	width: 300px;
+	border: 1px solid black;
 
 }
 
 .boxed {
-  border: 1.5px solid black ;
-  width: 160px;
-  height: 160px;
-  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black ;
+  width: 220px;
+  height: 277px;
+}
+
+input {
+  font-size: 15px;
+  height: 29px;
+}
+
+textarea {
+  font-size: 15px;
+  height: 29px;
+  resize: none;
 }
