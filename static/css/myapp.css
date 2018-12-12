@@ -1,0 +1,223 @@
+/* line 1, ../sass/_main.scss */
+
+body, html {
+  height: 100%;
+  background-color: white;
+}
+
+.colorful {
+  color: #bb8833;
+}
+
+#top {
+    /*background-color: #000000;*/
+    padding: 10px;
+    position: relative;
+}
+
+#Logo {
+    padding: 5px;
+    position: absolute;
+    top: 5px;
+
+}
+
+
+
+div.main_content {
+  font-size: 12px;
+  padding: 20px !important;
+}
+
+div.main_content button {
+  background-color: #000000;
+}
+
+
+div.main_content div.my_sidebar {
+  width: 10%;
+  float: left;
+}
+
+div.main_content div.my_sidebar button.side_button {
+  display: flex;
+  width: 90%;
+}
+
+div.main_content div.page_body {
+  padding: 5px;
+  width: 90%;
+  float: left;
+}
+
+div.main_content div.home_div {
+  /*background-color: hsl(151, 70%, 94%);*/
+  background-color: #e6e6e6;
+  width: 100%;
+  float: left;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+div.main_content div.outfit_div {
+  /*background-color: hsl(151, 70%, 94%);*/
+  background-color: #ffffff;
+  width: 100%;
+  float: left;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.pictureBoxProperties{
+  display: flex; 
+  border: 1px solid black;
+  width: 120px;
+  height: 150px;
+  /* background: yellow; */
+}
+
+/*
+.contain {
+  background: #0FFFFF;
+}
+*/
+
+.row1 {
+  /* background: green; */
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.row2 {
+  /* background: red; */
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.row3 {
+  /* background: orange; */
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.row4 {
+  /* background: #FF00FF; */
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.imageSingle {
+  display: flex;
+  margin-left: 400px;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.imageDouble1 {
+  display: flex;
+  margin-left: 330px;
+}
+
+.imageDouble2 {
+  display: flex;
+  margin-left: 20px;
+
+}
+
+.textBoundaries {
+  display: flex;
+  flex-direction: row;
+  width: 400px;
+  /* background: blue; */
+  align-items: center;
+  margin-left: 20px;
+}
+
+.margins {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+.main_content {
+  height: 105%;
+}
+
+
+
+
+
+
+
+
+
+
+div.div_if_adding_outfit {
+  display: flex;
+  flex-direction: column;
+}
+
+
+div.top_and_outerwear_pg_div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+div.headgear_input, div.top_input, div.outerwear_input, div.bottoms_input, div.footwear_input {
+  display: flex;
+  flex-direction: column;
+}
+
+div.headgear_pg_div, div.bottoms_pg_div, div.footwear_pg_div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+div.headgear_item, div.top_item, div.outerwear_item, div.bottoms_item, div.footwear_item {
+  display: flex;
+  flex-direction: column;
+}
+
+div.headgear_info_div, div.top_info_div, div.outerwear_info_div, div.bottoms_info_div, div.footwear_info_div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+h3.item_type {
+  margin: auto;
+}
+
+h2.page_title{
+  margin: auto;
+}
+
+
+
+
+
+.menu {
+  position: relative;
+  bottom: 10px;
+  left: 30%;
+  
+}
+
+.for_logged_out_user {
+  text-align: center;
+}

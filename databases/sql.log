@@ -1,0 +1,119 @@
+timestamp: 2018-12-08T12:32:11.696132
+CREATE TABLE "web2py_session_practiceproject"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "locked" CHAR(1),
+    "client_ip" CHAR(64),
+    "created_datetime" TIMESTAMP,
+    "modified_datetime" TIMESTAMP,
+    "unique_key" CHAR(64),
+    "session_data" BLOB
+);
+success!
+timestamp: 2018-12-08T12:32:11.704777
+CREATE TABLE "auth_user"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "first_name" CHAR(128),
+    "last_name" CHAR(128),
+    "email" CHAR(512),
+    "password" CHAR(512),
+    "registration_key" CHAR(512),
+    "reset_password_key" CHAR(512),
+    "registration_id" CHAR(512)
+);
+success!
+timestamp: 2018-12-08T12:32:11.709255
+CREATE TABLE "auth_group"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "role" CHAR(512),
+    "description" TEXT
+);
+success!
+timestamp: 2018-12-08T12:32:11.712776
+CREATE TABLE "auth_membership"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "group_id" INTEGER REFERENCES "auth_group" ("id") ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-12-08T12:32:11.717057
+CREATE TABLE "auth_permission"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "group_id" INTEGER REFERENCES "auth_group" ("id") ON DELETE CASCADE  ,
+    "name" CHAR(512),
+    "table_name" CHAR(512),
+    "record_id" INTEGER
+);
+success!
+timestamp: 2018-12-08T12:32:11.721327
+CREATE TABLE "auth_event"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "time_stamp" TIMESTAMP,
+    "client_ip" CHAR(512),
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "origin" CHAR(512),
+    "description" TEXT
+);
+success!
+timestamp: 2018-12-08T12:32:11.725792
+CREATE TABLE "auth_cas"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "created_on" TIMESTAMP,
+    "service" CHAR(512),
+    "ticket" CHAR(512),
+    "renew" CHAR(1)
+);
+success!
+timestamp: 2018-12-08T12:37:38.125156
+CREATE TABLE "outfit"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_id" CHAR(512),
+    "headgear_name" CHAR(512),
+    "headgear_price" DOUBLE,
+    "headgear_pg_url" CHAR(512),
+    "headgear_img_url" CHAR(512)
+);
+success!
+timestamp: 2018-12-08T12:38:36.516104
+CREATE TABLE "hat"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_id" CHAR(512),
+    "hat_name" CHAR(512),
+    "hat_price" DOUBLE,
+    "hat_pg_url" CHAR(512),
+    "hat_img_url" CHAR(512)
+);
+success!
+timestamp: 2018-12-08T15:20:31.149923
+ALTER TABLE "outfit" ADD "bottoms_img_url" CHAR(512);
+timestamp: 2018-12-08T15:20:31.154272
+ALTER TABLE "outfit" ADD "footwear_pg_url" CHAR(512);
+timestamp: 2018-12-08T15:20:31.159431
+ALTER TABLE "outfit" ADD "top_img_url" CHAR(512);
+timestamp: 2018-12-08T15:20:31.165554
+ALTER TABLE "outfit" ADD "bottoms_price" DOUBLE;
+timestamp: 2018-12-08T15:20:31.171312
+ALTER TABLE "outfit" ADD "outerwear_pg_url" CHAR(512);
+timestamp: 2018-12-08T15:20:31.180744
+ALTER TABLE "outfit" ADD "bottoms_pg_url" CHAR(512);
+timestamp: 2018-12-08T15:20:31.182560
+ALTER TABLE "outfit" ADD "bottoms_name" CHAR(512);
+timestamp: 2018-12-08T15:20:31.184434
+ALTER TABLE "outfit" ADD "footwear_img_url" CHAR(512);
+timestamp: 2018-12-08T15:20:31.186543
+ALTER TABLE "outfit" ADD "outerwear_img_url" CHAR(512);
+timestamp: 2018-12-08T15:20:31.187978
+ALTER TABLE "outfit" ADD "outerwear_price" DOUBLE;
+timestamp: 2018-12-08T15:20:31.195464
+ALTER TABLE "outfit" ADD "footwear_price" DOUBLE;
+timestamp: 2018-12-08T15:20:31.196901
+ALTER TABLE "outfit" ADD "outerwear_name" CHAR(512);
+timestamp: 2018-12-08T15:20:31.198441
+ALTER TABLE "outfit" ADD "footwear_name" CHAR(512);
+timestamp: 2018-12-08T15:20:31.199784
+ALTER TABLE "outfit" ADD "top_name" CHAR(512);
+timestamp: 2018-12-08T15:20:31.201822
+ALTER TABLE "outfit" ADD "top_pg_url" CHAR(512);
+timestamp: 2018-12-08T15:20:31.203562
+ALTER TABLE "outfit" ADD "top_price" DOUBLE;
+success!

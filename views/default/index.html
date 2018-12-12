@@ -1,0 +1,518 @@
+{{extend 'layout.html'}}
+
+{{block head}}
+<script src="{{=URL('static', 'js/vue.js')}}"></script>
+<script>
+    var get_outfits_url = "{{=URL('api', 'get_outfits', user_signature=True)}}";
+    var create_outfit_url = "{{=URL('api', 'create_outfit', user_signature=True)}}";
+    var delete_outfit_url = "{{=URL('api', 'delete_outfit', user_signature=True)}}";
+    var update_outfit_url = "{{=URL('api', 'update_outfit', user_signature=True)}}";
+    var logged_in_user_email = "{{= None if auth.user is None else auth.user.email}}";
+    var is_logged_in = {{='false' if auth.user is None else 'true'}};
+</script>
+{{end}}
+
+<div class="main_content">
+
+    <div id="vue-div" class="display:none">
+        <div class="for_logged_out_user" v-if="!is_logged_in">
+            <h1>Welcome to Wishlist Wardrobe!</h1>
+            <h3>Please Sign Up, Babe!</h3>
+        </div>
+
+        <div class="for_logged_in_user" v-if="is_logged_in">
+            <div class="my_sidebar">
+
+                <button class="side_button" v-on:click="go_home()">Home</button>
+
+                <button class="side_button" v-for="outfit in outfits" v-on:click="show_this_one(outfit._idx)">
+                    Outfit ${outfit._idx + 1}
+                </button>
+            </div>
+
+            <div class="page_body">
+
+                <div class="home_div" v-show="show_home">
+                    <h2 class="margins">Create the Wardrobe of your dreams! :)</h2>
+
+                    <div v-show="!adding_outfit ">
+                        <button class="add_outfit_button margins" v-on:click="start_create_outfit()">Create <i class="fa fa-plus-square-o"></i></button>
+                    </div>
+
+                    <div class="div_if_adding_outfit margins" v-show="adding_outfit">
+
+                        <!-- THIS IS THE AREA OF THE FORM WHEN CREATING A BRAND NEW OUTFIT -->
+                        <div class="headgear_pg_div">
+                            <div class="headgear_item">
+                                <h3 class="item_type">Headgear</h3>
+
+                                <div class="headgear_info_div">
+                                    <div class="headgear_input">
+
+                                        <input class="headgear_input" v-model="form_headgear_name" placeholder="Headgear name">
+                                        <input class="headgear_input" v-model="form_headgear_price" type="number" step="0.01"
+                                            placeholder="Headgear price">
+                                        <input class="headgear_input" v-model="form_headgear_pg_url" type="url"
+                                            placeholder="Headgear page url">
+                                        <input class="headgear_input" v-model="form_headgear_img_url" type="url"
+                                            placeholder="Headgear img url">
+
+                                    </div>
+
+                                    <div class="headgear_image">
+                                        <img v-show="form_headgear_img_url" v-bind:src="form_headgear_img_url" height="150px"
+                                            width="150px" />
+                                        <img v-show="!form_headgear_img_url" height="150px" width="150px" />
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="top_and_outerwear_pg_div">
+                            <div class="top_item">
+                                <h3 class="item_type">Top</h3>
+
+                                <div class="top_info_div">
+                                    <div class="top_input">
+                                        <input class="top_input" v-model="form_top_name" placeholder="Top name">
+                                        <input class="top_input" v-model="form_top_price" type="number" step="0.01" placeholder="Top price">
+                                        <input class="top_input" v-model="form_top_pg_url" type="url" placeholder="Top page url">
+                                        <input class="top_input" v-model="form_top_img_url" type="url" placeholder="Top img url">
+
+                                    </div>
+
+                                    <div class="top_image">
+                                        <img v-show="form_top_img_url" v-bind:src="form_top_img_url" height="150px"
+                                            width="150px" />
+                                        <img v-show="!form_top_img_url" height="150px" width="150px" />
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="outerwear_item">
+                                <h3 class="item_type">Outerwear</h3>
+
+                                <div class="outerwear_info_div">
+                                    <div class="outerwear_image">
+                                        <img v-show="form_outerwear_img_url" v-bind:src="form_outerwear_img_url" height="150px"
+                                            width="150px" />
+                                        <img v-show="!form_outerwear_img_url" height="150px" width="150px" />
+                                    </div>
+
+                                    <div class="outerwear_input">
+                                        <input class="outerwear_input" v-model="form_outerwear_name" placeholder="Outerwear name">
+                                        <input class="outerwear_input" v-model="form_outerwear_price" type="number" step="0.01"
+                                            placeholder="Outerwear price">
+                                        <input class="outerwear_input" v-model="form_outerwear_pg_url" type="url"
+                                            placeholder="Outerwear page url">
+                                        <input class="outerwear_input" v-model="form_outerwear_img_url" type="url"
+                                            placeholder="Outerwear img url">
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="bottoms_pg_div">
+
+                            <div class="bottoms_item">
+
+                                <h3 class="item_type">Bottoms</h3>
+
+                                <div class="bottoms_info_div">
+                                    <div class="bottoms_input">
+                                        <input class="bottoms_input" v-model="form_bottoms_name" placeholder="Bottoms name">
+                                        <input class="bottoms_input" v-model="form_bottoms_price" type="number" step="0.01"
+                                            placeholder="Bottoms price">
+                                        <input class="bottoms_input" v-model="form_bottoms_pg_url" type="url"
+                                            placeholder="Bottoms page url">
+                                        <input class="bottoms_input" v-model="form_bottoms_img_url" type="url"
+                                            placeholder="Bottoms img url">
+
+                                    </div>
+
+                                    <div class="bottoms_image">
+                                        <img v-show="form_bottoms_img_url" v-bind:src="form_bottoms_img_url" height="150px"
+                                            width="150px" />
+                                        <img v-show="!form_bottoms_img_url" height="150px" width="150px" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="footwear_pg_div">
+
+                            <div class="footwear_item">
+                                <h3 class="item_type">Footwear</h3>
+
+                                <div class="footwear_info_div">
+                                    <div class="footwear_input">
+                                        <input class="footwear_input" v-model="form_footwear_name" placeholder="Footwear name">
+                                        <input class="footwear_input" v-model="form_footwear_price" type="number" step="0.01"
+                                            placeholder="Footwear price">
+                                        <input class="footwear_input" v-model="form_footwear_pg_url" type="url"
+                                            placeholder="Footwear page url">
+                                        <input class="footwear_input" v-model="form_footwear_img_url" type="url"
+                                            placeholder="Footwear img url">
+
+                                    </div>
+
+                                    <div class="footwear_image">
+                                        <img v-show="form_footwear_img_url" v-bind:src="form_footwear_img_url" height="150px"
+                                            width="150px" />
+                                        <img v-show="!form_footwear_img_url" height="150px" width="150px" />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <br><br><br>
+
+
+                        <div class="adding_outfit_buttons_div">
+                            <button class="add_outfit_button" v-on:click="adding_outfit=!adding_outfit">Cancel <i class="fa fa-ban"></i></button>
+                            <button class="add_outfit_button" v-on:click="end_create_outfit()">Save <i class="fa fa-floppy-o"></i></button>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="outfit_div" v-for="outfit in outfits">
+
+                    <div class="outfit_when_updating margins" v-show="outfit._show && outfit._updating">
+
+                        <!-- WORK BELOW THIS LINE -->
+                        <!-- THIS IS THE FORM WHEN EDITING AN EXISTING OUTFIT -->
+
+
+
+
+
+                        <!-- START HERE -->
+
+                        <div class="headgear_pg_div">
+                            <div class="headgear_item">
+                                <h3 class="item_type">Headgear</h3>
+
+                                <div class="headgear_info_div">
+                                    <div class="headgear_input">
+
+                                        <input class="headgear_input" v-model="outfit.headgear_name" placeholder="Headgear name">
+                                        <input class="headgear_input" v-model="outfit.headgear_price" type="number" step="0.01"
+                                            placeholder="Headgear price">
+                                        <input class="headgear_input" v-model="outfit.headgear_pg_url" type="url"
+                                            placeholder="Headgear page url">
+                                        <input class="headgear_input" v-model="outfit.headgear_img_url" type="url"
+                                            placeholder="Headgear img url">
+
+                                    </div>
+
+                                    <div class="headgear_image">
+                                        <img v-show="outfit.headgear_img_url" v-bind:src="outfit.headgear_img_url"
+                                            height="150px" width="150px" />
+                                        <img v-show="!outfit.headgear_img_url" height="150px" width="150px" />
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="top_and_outerwear_pg_div">
+                            <div class="top_item">
+                                <h3 class="item_type">Top</h3>
+
+                                <div class="top_info_div">
+                                    <div class="top_input">
+                                        <input class="top_input" v-model="outfit.top_name" placeholder="Top name">
+                                        <input class="top_input" v-model="outfit.top_price" type="number" step="0.01" placeholder="Top price">
+                                        <input class="top_input" v-model="outfit.top_pg_url" type="url" placeholder="Top page url">
+                                        <input class="top_input" v-model="outfit.top_img_url" type="url" placeholder="Top img url">
+
+                                    </div>
+
+                                    <div class="top_image">
+                                        <img v-show="outfit.top_img_url" v-bind:src="outfit.top_img_url" height="150px"
+                                            width="150px" />
+                                        <img v-show="!outfit.top_img_url" height="150px" width="150px" />
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="outerwear_item">
+                                <h3 class="item_type">Outerwear</h3>
+
+                                <div class="outerwear_info_div">
+                                    <div class="outerwear_image">
+                                        <img v-show="outfit.outerwear_img_url" v-bind:src="outfit.outerwear_img_url"
+                                            height="150px" width="150px" />
+                                        <img v-show="!outfit.outerwear_img_url" height="150px" width="150px" />
+                                    </div>
+
+                                    <div class="outerwear_input">
+                                        <input class="outerwear_input" v-model="outfit.outerwear_name" placeholder="Outerwear name">
+                                        <input class="outerwear_input" v-model="outfit.outerwear_price" type="number" step="0.01"
+                                            placeholder="Outerwear price">
+                                        <input class="outerwear_input" v-model="outfit.outerwear_pg_url" type="url"
+                                            placeholder="Outerwear page url">
+                                        <input class="outerwear_input" v-model="outfit.outerwear_img_url" type="url"
+                                            placeholder="Outerwear img url">
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="bottoms_pg_div">
+
+                            <div class="bottoms_item">
+
+                                <h3 class="item_type">Bottoms</h3>
+
+                                <div class="bottoms_info_div">
+                                    <div class="bottoms_input">
+                                        <input class="bottoms_input" v-model="outfit.bottoms_name" placeholder="Bottoms name">
+                                        <input class="bottoms_input" v-model="outfit.bottoms_price" type="number" step="0.01"
+                                            placeholder="Bottoms price">
+                                        <input class="bottoms_input" v-model="outfit.bottoms_pg_url" type="url"
+                                            placeholder="Bottoms page url">
+                                        <input class="bottoms_input" v-model="outfit.bottoms_img_url" type="url"
+                                            placeholder="Bottoms img url">
+
+                                    </div>
+
+                                    <div class="bottoms_image">
+                                        <img v-show="outfit.bottoms_img_url" v-bind:src="outfit.bottoms_img_url" height="150px"
+                                            width="150px" />
+                                        <img v-show="!outfit.bottoms_img_url" height="150px" width="150px" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="footwear_pg_div">
+
+                            <div class="footwear_item">
+                                <h3 class="item_type">Footwear</h3>
+
+                                <div class="footwear_info_div">
+                                    <div class="footwear_input">
+                                        <input class="footwear_input" v-model="outfit.footwear_name" placeholder="Footwear name">
+                                        <input class="footwear_input" v-model="outfit.footwear_price" type="number" step="0.01"
+                                            placeholder="Footwear price">
+                                        <input class="footwear_input" v-model="outfit.footwear_pg_url" type="url"
+                                            placeholder="Footwear page url">
+                                        <input class="footwear_input" v-model="outfit.footwear_img_url" type="url"
+                                            placeholder="Footwear img url">
+
+                                    </div>
+
+                                    <div class="footwear_image">
+                                        <img v-show="outfit.footwear_img_url" v-bind:src="outfit.footwear_img_url"
+                                            height="150px" width="150px" />
+                                        <img v-show="!outfit.footwear_img_url" height="150px" width="150px" />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- END HERE -->
+
+                        <br><br><br>
+
+
+                        <!-- DON'T TOUCH BEYOND THIS POINT -->
+
+                        <div class="updating_outfit_buttons_div">
+                            <button class="cancel_updated_outfit_button" v-on:click="outfit._updating=!outfit._updating">Cancel
+                                <i class="fa fa-ban"></i></button>
+                            <button class="save_updated_outfit_button" v-on:click="end_update_outfit(outfit._idx)">Save
+                                <i class="fa fa-floppy-o"></i></button>
+                        </div>
+
+                    </div>
+                    
+
+                    <div class="outfit_when_not_updating contain" v-show="outfit._show && !outfit._updating">
+
+                        <!-- WORK BELOW THIS LINE -->
+                        <!-- THIS IS THE OUTFIT DISPLAYED WHEN IT'S NOT BEING EDIT -->
+
+                        <!-- Row 1 Work -->
+                        <div class="row1">
+                            <!-- Name and Price info-->
+                            <div class="textBoundaries">
+                                <div>
+                                    <div>
+                                        <h3>Hat:</h3>
+                                    </div>
+                                    <div>${outfit.headgear_name}</div>
+                                    <div>$${outfit.headgear_price}</div>
+                                </div>
+                            </div>
+
+                            <!-- Displays image onto box -->
+                            <div class="imageSingle">
+                                <div class="pictureBoxProperties">
+                                    <div v-if="outfit_headgear_img_url != '' " class="boxed">
+                                        <img v-bind:src="outfit.headgear_img_url" height="148px" width="118px"/>
+                                    </div>
+                                    <div v-if="outfit_headgear_img_url == '' " class="boxed">
+                                        <img height="100px" width="100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Row 2 Work -->
+                        <div class="row2">
+                            <!-- Name and Price info-->
+                            <div class="textBoundaries">
+                                <div>
+                                    <div>
+                                        <div>
+                                            <h3>Top:</h3>
+                                        </div>
+                                        <div>${outfit.top_name}</div>
+                                        <div>$${outfit.top_price}</div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <h3>Outerwear:</h3>
+                                        </div>
+                                        <div>${outfit.outerwear_name}</div>
+                                        <div>$${outfit.outerwear_price}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Displays image onto box -->
+                            <div class="imageDouble1">
+                                <div class="pictureBoxProperties">
+                                    <div v-if="outfit_top_img_url != '' " class="boxed">
+                                        <img v-bind:src="outfit.top_img_url" height="148px" width="118px"/>
+                                    </div>
+                                    <div v-if="outfit_top_img_url == '' " class="boxed">
+                                        <img height="100px" width="100%"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Displays image onto box -->
+                            <div class="imageDouble2">
+                                <div class="pictureBoxProperties">
+                                    <div v-if="outfit_outerwear_img_url != '' " class="boxed">
+                                        <img v-bind:src="outfit.outerwear_img_url" height="148px" width="118px"/>
+                                    </div>
+                                    <div v-if="outfit_outerwear_img_url == '' " class="boxed">
+                                        <img height="100px" width="100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Row 3 Work -->
+                        <div class="row3">
+
+                            <!-- Name and Price info-->
+                            <div class="textBoundaries">
+                                <div>
+                                    <div>
+                                        <h3>Bottoms:</h3>
+                                    </div>
+                                    <div>${outfit.bottoms_name}</div>
+                                    <div>$${outfit.bottoms_price}</div>
+                                </div>
+                            </div>
+
+                            <!-- Displays image onto box -->
+                            <div class="imageSingle">
+                                <div class="pictureBoxProperties">
+                                    <div v-if="outfit_bottoms_img_url != '' " class="boxed">
+                                        <img v-bind:src="outfit.bottoms_img_url" height="148px" width="118px"/>
+                                    </div>
+                                    <div v-if="outfit_bottoms_img_url == '' " class="boxed">
+                                        <img height="100px" width="100%"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- Row 4 Work -->
+                        <div class="row4">
+
+                            <!-- Name and Price info-->
+                            <div class="textBoundaries">
+                                <div>
+                                    <div>
+                                        <h3>Footwear:</h3>
+                                    </div>
+                                    <div>${outfit.footwear_name}</div>
+                                    <div>$${outfit.footwear_price}</div>
+                                </div>
+                            </div>
+
+                            <!-- Displays image onto box -->
+                            <div class="imageSingle">
+                                <div class="pictureBoxProperties">
+                                    <div v-if="outfit_footwear_img_url != '' " class="boxed">
+                                        <img v-bind:src="outfit.footwear_img_url" height="148px" width="118px"/>
+                                    </div>
+                                    <div v-if="outfit_footwear_img_url == '' " class="boxed">
+                                        <img height="100px" width="100%"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <br><br><br><br>
+
+                         <div class="outfit_header">
+                            <div class="margins">
+                                <button class="delete_button" v-on:click="delete_outfit(outfit._idx)">Trash it! <i
+                                        class="fa fa-trash-o"></i></button>
+                                <button class="update_button" v-on:click="start_update_outfit(outfit._idx)">Update
+                                    it! <i class="fa fa-pencil-square-o"></i></button>
+                            </div>
+                            <!-- <h2># ${outfit._idx + 1}</h2> -->
+                        </div>
+
+                        <!-- DON'T TOUCH BEYOND THIS POINT -->
+
+                    
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{=URL('static', 'js/default_index.js')}}"></script>
