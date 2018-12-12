@@ -196,6 +196,17 @@ var app = function () {
 
     };
 
+    /*
+
+    // When the user clicks on the button, scroll to the top of the document
+    self.go_to_top = function() {
+        //document.body.scrollTop = 0; // For Safari
+        //document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        //window.scrollTo(0, 0);
+    }
+
+    */
+
     self.delete_outfit = function (outfit_idx) {
         var outfit_id = self.vue.outfits[outfit_idx].id;
 

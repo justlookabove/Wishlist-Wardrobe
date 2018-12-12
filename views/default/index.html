@@ -40,7 +40,7 @@
                     <p class="margins">Write Stuff here...</p>
                     <br>
 
-                    <div v-show="!adding_outfit ">
+                    <div class="margins" v-show="!adding_outfit ">
                         <button class="add_outfit_button margins" v-on:click="start_create_outfit()">Create <i class="fa fa-plus-square-o"></i></button>
                     </div>
 
@@ -373,10 +373,10 @@
                             </div>
 
                             <!-- Displays image onto box -->
-                            <div class="imageSingle">
-                                <div class="pictureBoxProperties">
+                            <div class="imageSingle1">
+                                <div class="pictureBox1Properties">
                                     <div v-if="outfit_headgear_img_url != '' " class="boxed">
-                                        <img v-bind:src="outfit.headgear_img_url" height="148px" width="118px"/>
+                                        <img v-bind:src="outfit.headgear_img_url" height="118px" width="118px"/>
                                     </div>
                                     <div v-if="outfit_headgear_img_url == '' " class="boxed">
                                         <img height="100px" width="100%"/>
@@ -410,9 +410,9 @@
 
                             <!-- Displays image onto box -->
                             <div class="imageDouble1">
-                                <div class="pictureBoxProperties">
+                                <div class="pictureBox2Properties">
                                     <div v-if="outfit_top_img_url != '' " class="boxed">
-                                        <img v-bind:src="outfit.top_img_url" height="148px" width="118px"/>
+                                        <img v-bind:src="outfit.top_img_url" height="178px" width="148px"/>
                                     </div>
                                     <div v-if="outfit_top_img_url == '' " class="boxed">
                                         <img height="100px" width="100%"/>
@@ -422,9 +422,9 @@
 
                             <!-- Displays image onto box -->
                             <div class="imageDouble2">
-                                <div class="pictureBoxProperties">
+                                <div class="pictureBox3Properties">
                                     <div v-if="outfit_outerwear_img_url != '' " class="boxed">
-                                        <img v-bind:src="outfit.outerwear_img_url" height="148px" width="118px"/>
+                                        <img v-bind:src="outfit.outerwear_img_url" height="178px" width="148px"/>
                                     </div>
                                     <div v-if="outfit_outerwear_img_url == '' " class="boxed">
                                         <img height="100px" width="100%"/>
@@ -449,10 +449,10 @@
                             </div>
 
                             <!-- Displays image onto box -->
-                            <div class="imageSingle">
-                                <div class="pictureBoxProperties">
+                            <div class="imageSingle2">
+                                <div class="pictureBox4Properties">
                                     <div v-if="outfit_bottoms_img_url != '' " class="boxed">
-                                        <img v-bind:src="outfit.bottoms_img_url" height="148px" width="118px"/>
+                                        <img v-bind:src="outfit.bottoms_img_url" height="178px" width="138px"/>
                                     </div>
                                     <div v-if="outfit_bottoms_img_url == '' " class="boxed">
                                         <img height="100px" width="100%"/>
@@ -478,10 +478,10 @@
                             </div>
 
                             <!-- Displays image onto box -->
-                            <div class="imageSingle">
-                                <div class="pictureBoxProperties">
+                            <div class="imageSingle3">
+                                <div class="pictureBox5Properties">
                                     <div v-if="outfit_footwear_img_url != '' " class="boxed">
-                                        <img v-bind:src="outfit.footwear_img_url" height="148px" width="118px"/>
+                                        <img v-bind:src="outfit.footwear_img_url" height="118px" width="118px"/>
                                     </div>
                                     <div v-if="outfit_footwear_img_url == '' " class="boxed">
                                         <img height="100px" width="100%"/>

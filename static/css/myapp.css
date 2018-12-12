@@ -2,7 +2,7 @@
 
 body, html {
   height: 118%;
-  background-color: white;
+  background-color: white; 
 }
 
 .colorful {
@@ -19,7 +19,6 @@ body, html {
     padding: 5px;
     position: absolute;
     top: 5px;
-
 }
 
 
@@ -80,13 +79,51 @@ div.main_content div.outfit_div {
 
 
 
+.pictureBox1Properties{
+  display: flex; 
+  border: 1px solid black;
+  width: 120px;
+  height: 120px;
+}
+
+.pictureBox2Properties{
+  display: flex; 
+  border: 1px solid black;
+  width: 150px;
+  height: 180px;
+  background: yellow;
+}
+
+.pictureBox3Properties{
+  display: flex; 
+  border: 1px solid black;
+  width: 150px;
+  height: 180px;
+}
+
+.pictureBox4Properties{
+  display: flex; 
+  border: 1px solid black;
+  width: 140px;
+  height: 180px;
+}
+
+.pictureBox5Properties{
+  display: flex; 
+  border: 1px solid black;
+  width: 120px;
+  height: 120px;
+  background: yellow;
+}
+
+/*
 .pictureBoxProperties{
   display: flex; 
   border: 1px solid black;
   width: 120px;
   height: 150px;
-  /* background: yellow; */
 }
+*/
 
 /*
 .contain {
@@ -96,6 +133,7 @@ div.main_content div.outfit_div {
 
 .updateBackgroundColor {
   background: #e6e6e6;
+  height:90%;
 }
 
 .row1 {
@@ -122,9 +160,24 @@ div.main_content div.outfit_div {
   margin-bottom: 10px;
 }
 
-.imageSingle {
+.imageSingle1 {
   display: flex;
-  margin-left: 400px;
+  margin-left: 420px;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.imageSingle2 {
+  display: flex;
+  margin-left: 410px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.imageSingle3 {
+  display: flex;
+  margin-left: 420px;
   margin-bottom: 10px;
   justify-content: center;
 }
@@ -153,6 +206,7 @@ div.main_content div.outfit_div {
   margin-left: 20px;
   margin-bottom: 20px;
   margin-right: 20px;
+  text-align: center;
 }
 
 .main_content {
@@ -223,7 +277,7 @@ h2.page_title{
 .menu {
   position: relative;
   bottom: 10px;
-  left: 30%;
+  left: 28%;
   
 }
 
@@ -234,4 +288,12 @@ h2.page_title{
 .updating_outfit_buttons_div {
   margin-left: 20px;
   margin-bottom: 20px;
+}
+
+.btn {
+  background-color: black;
+}
+
+.buttonCenter {
+  text-align: center;
 }
