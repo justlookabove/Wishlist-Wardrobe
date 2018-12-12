@@ -18,9 +18,14 @@
         <div class="for_logged_out_user" v-if="!is_logged_in">
             <h1>Welcome to Wishlist Wardrobe!</h1>
             <br><br>
-            <h5>This app is designed to</h5>
+            <h4 class="buttonCenter">This app is designed to help you to collect and organize fashion<br>from the web in a clean and intuitive way!</h4>
             <br><br>
-            <h2>Please Sign Up pr Log In, to use the app!</h2>
+            <p class="buttonCenter"><b>Please Sign-up pr Login, to use the app!</b></p>
+
+            <div class="row">
+            
+                <img class="buttonCenter" src="/Wishlist_Wardrobe/static/images/Background.jpg" height="100%" width="100%" />
+            </div>
         </div>
 
         <div class="for_logged_in_user" v-if="is_logged_in">
@@ -37,7 +42,7 @@
 
                 <div class="home_div" v-show="show_home">
                     <h2 class="margins">Create the Wardrobe of your dreams! :)</h2>
-                    <p class="margins">Write Stuff here...</p>
+                    <p class="margins">Click on <b>Create</b> to add items. Add the <b>Name</b>, <b>Price</b>, <b>Page URL</b>, and <b>Item URL</b> into each of the corresponding boxes. <br>Hit <b>Save</b> and see your fashion-visions come to life! You can <b>Update</b> or <b>Trash</b> them whenever you want.</p>
                     <br>
 
                     <div class="margins" v-show="!adding_outfit ">
@@ -186,7 +191,7 @@
 
 
                         <div class="adding_outfit_buttons_div">
-                            <button class="add_outfit_button" v-on:click="adding_outfit=!adding_outfit">Cancel <i class="fa fa-ban"></i></button>
+                            <button class="add_outfit_button" v-on:click="adding_outfit=!adding_outfit; go_to_top();">Cancel <i class="fa fa-ban"></i></button>
                             <button class="add_outfit_button" v-on:click="end_create_outfit()">Save <i class="fa fa-floppy-o"></i></button>
                         </div>
 
@@ -375,11 +380,11 @@
                             <!-- Displays image onto box -->
                             <div class="imageSingle1">
                                 <div class="pictureBox1Properties">
-                                    <div v-if="outfit_headgear_img_url != '' " class="boxed">
-                                        <img v-bind:src="outfit.headgear_img_url" height="118px" width="118px"/>
+                                    <div v-if="outfit.headgear_img_url != '' " class="boxed">
+                                        <img v-on:click="open_site(outfit.headgear_pg_url)" v-bind:src="outfit.headgear_img_url" height="118px" width="118px"/>
                                     </div>
-                                    <div v-if="outfit_headgear_img_url == '' " class="boxed">
-                                        <img height="100px" width="100%"/>
+                                    <div v-if="outfit.headgear_img_url == '' " class="boxed displayAddImage">
+                                        <img src="/Wishlist_Wardrobe/static/images/please.png" height="100px" width="100px"/>
                                     </div>
                                 </div>
                             </div>
@@ -411,11 +416,11 @@
                             <!-- Displays image onto box -->
                             <div class="imageDouble1">
                                 <div class="pictureBox2Properties">
-                                    <div v-if="outfit_top_img_url != '' " class="boxed">
-                                        <img v-bind:src="outfit.top_img_url" height="178px" width="148px"/>
+                                    <div v-if="outfit.top_img_url != '' " class="boxed">
+                                        <img v-on:click="open_site(outfit.top_pg_url)" v-bind:src="outfit.top_img_url" height="178px" width="148px"/>
                                     </div>
-                                    <div v-if="outfit_top_img_url == '' " class="boxed">
-                                        <img height="100px" width="100%"/>
+                                    <div v-if="outfit.top_img_url == '' " class="boxed displayAddImage">
+                                        <img src="/Wishlist_Wardrobe/static/images/please.png" height="100px" width="100px"/>
                                     </div>
                                 </div>
                             </div>
@@ -423,11 +428,11 @@
                             <!-- Displays image onto box -->
                             <div class="imageDouble2">
                                 <div class="pictureBox3Properties">
-                                    <div v-if="outfit_outerwear_img_url != '' " class="boxed">
-                                        <img v-bind:src="outfit.outerwear_img_url" height="178px" width="148px"/>
+                                    <div v-if="outfit.outerwear_img_url != '' " class="boxed">
+                                        <img v-on:click="open_site(outfit.outerwear_pg_url)" v-bind:src="outfit.outerwear_img_url" height="178px" width="148px"/>
                                     </div>
-                                    <div v-if="outfit_outerwear_img_url == '' " class="boxed">
-                                        <img height="100px" width="100%"/>
+                                    <div v-if="outfit.outerwear_img_url == '' " class="boxed displayAddImage">
+                                        <img src="/Wishlist_Wardrobe/static/images/please.png" height="100px" width="100px"/>
                                     </div>
                                 </div>
                             </div>
@@ -451,11 +456,11 @@
                             <!-- Displays image onto box -->
                             <div class="imageSingle2">
                                 <div class="pictureBox4Properties">
-                                    <div v-if="outfit_bottoms_img_url != '' " class="boxed">
-                                        <img v-bind:src="outfit.bottoms_img_url" height="178px" width="138px"/>
+                                    <div v-if="outfit.bottoms_img_url != '' " class="boxed">
+                                        <img v-on:click="open_site(outfit.bottom_pg_url)" v-bind:src="outfit.bottoms_img_url" height="178px" width="138px"/>
                                     </div>
-                                    <div v-if="outfit_bottoms_img_url == '' " class="boxed">
-                                        <img height="100px" width="100%"/>
+                                    <div v-if="outfit.bottoms_img_url == '' " class="boxed displayAddImage">
+                                        <img src="/Wishlist_Wardrobe/static/images/please.png" height="100px" width="100px"/>
                                     </div>
                                 </div>
                             </div>
@@ -480,14 +485,15 @@
                             <!-- Displays image onto box -->
                             <div class="imageSingle3">
                                 <div class="pictureBox5Properties">
-                                    <div v-if="outfit_footwear_img_url != '' " class="boxed">
-                                        <img v-bind:src="outfit.footwear_img_url" height="118px" width="118px"/>
+                                    <div v-if="outfit.footwear_img_url != '' " class="boxed">
+                                        <img v-on:click="open_site(outfit.footwear_pg_url)" v-bind:src="outfit.footwear_img_url" height="138px" width="138px"/>
                                     </div>
-                                    <div v-if="outfit_footwear_img_url == '' " class="boxed">
-                                        <img height="100px" width="100%"/>
+                                    <div v-if="outfit.footwear_img_url == '' " class="boxed displayAddImage">
+                                        <img src="/Wishlist_Wardrobe/static/images/please.png" height="100px" width="100px"/>
                                     </div>
                                 </div>
                             </div>
+
 
                         </div>
 

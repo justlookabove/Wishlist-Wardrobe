@@ -128,3 +128,6 @@ CREATE TABLE "web2py_session_Wishlist_Wardrobe"(
     "session_data" BLOB
 );
 success!
+success!
+success!
+success!

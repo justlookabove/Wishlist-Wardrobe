@@ -196,16 +196,21 @@ var app = function () {
 
     };
 
-    /*
 
     // When the user clicks on the button, scroll to the top of the document
     self.go_to_top = function() {
-        //document.body.scrollTop = 0; // For Safari
-        //document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-        //window.scrollTo(0, 0);
+        // document.body.scrollTop = 0; // For Safari
+        // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        // //window.scrollTo(0, 0);
     }
 
-    */
+    self.open_site = function(page_url) {
+        if (page_url != '') {
+            window.open(page_url, target="_blank");
+        }
+    };
+
+
 
     self.delete_outfit = function (outfit_idx) {
         var outfit_id = self.vue.outfits[outfit_idx].id;
@@ -348,6 +353,8 @@ var app = function () {
             delete_outfit: self.delete_outfit,
             start_update_outfit: self.start_update_outfit,
             end_update_outfit: self.end_update_outfit,
+            open_site: self.open_site,
+            go_to_top: self.go_to_top,
         }
 
     });
