@@ -17,7 +17,10 @@
     <div id="vue-div" class="display:none">
         <div class="for_logged_out_user" v-if="!is_logged_in">
             <h1>Welcome to Wishlist Wardrobe!</h1>
-            <h3>Please Sign Up, Babe!</h3>
+            <br><br>
+            <h5>This app is designed to</h5>
+            <br><br>
+            <h2>Please Sign Up pr Log In, to use the app!</h2>
         </div>
 
         <div class="for_logged_in_user" v-if="is_logged_in">
@@ -34,6 +37,8 @@
 
                 <div class="home_div" v-show="show_home">
                     <h2 class="margins">Create the Wardrobe of your dreams! :)</h2>
+                    <p class="margins">Write Stuff here...</p>
+                    <br>
 
                     <div v-show="!adding_outfit ">
                         <button class="add_outfit_button margins" v-on:click="start_create_outfit()">Create <i class="fa fa-plus-square-o"></i></button>
@@ -44,6 +49,7 @@
                         <!-- THIS IS THE AREA OF THE FORM WHEN CREATING A BRAND NEW OUTFIT -->
                         <div class="headgear_pg_div">
                             <div class="headgear_item">
+                                <br><br>
                                 <h3 class="item_type">Headgear</h3>
 
                                 <div class="headgear_info_div">
@@ -191,19 +197,14 @@
 
                 <div class="outfit_div" v-for="outfit in outfits">
 
-                    <div class="outfit_when_updating margins" v-show="outfit._show && outfit._updating">
+                    <div class="outfit_when_updating margins updateBackgroundColor" v-show="outfit._show && outfit._updating">
 
                         <!-- WORK BELOW THIS LINE -->
                         <!-- THIS IS THE FORM WHEN EDITING AN EXISTING OUTFIT -->
 
-
-
-
-
-                        <!-- START HERE -->
-
                         <div class="headgear_pg_div">
                             <div class="headgear_item">
+                                <br><br><br>
                                 <h3 class="item_type">Headgear</h3>
 
                                 <div class="headgear_info_div">
@@ -306,7 +307,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="footwear_pg_div">
@@ -344,7 +344,7 @@
 
                         <!-- DON'T TOUCH BEYOND THIS POINT -->
 
-                        <div class="updating_outfit_buttons_div">
+                        <div class="updating_outfit_buttons_div margins">
                             <button class="cancel_updated_outfit_button" v-on:click="outfit._updating=!outfit._updating">Cancel
                                 <i class="fa fa-ban"></i></button>
                             <button class="save_updated_outfit_button" v-on:click="end_update_outfit(outfit._idx)">Save

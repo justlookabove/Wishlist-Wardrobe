@@ -1,7 +1,7 @@
 /* line 1, ../sass/_main.scss */
 
 body, html {
-  height: 100%;
+  height: 118%;
   background-color: white;
 }
 
@@ -94,6 +94,10 @@ div.main_content div.outfit_div {
 }
 */
 
+.updateBackgroundColor {
+  background: #e6e6e6;
+}
+
 .row1 {
   /* background: green; */
   display: flex;
@@ -152,7 +156,7 @@ div.main_content div.outfit_div {
 }
 
 .main_content {
-  height: 105%;
+  height: 100%;
 }
 
 
@@ -179,6 +183,8 @@ div.top_and_outerwear_pg_div {
 div.headgear_input, div.top_input, div.outerwear_input, div.bottoms_input, div.footwear_input {
   display: flex;
   flex-direction: column;
+  margin-right: 20px;
+  margin-left: 20px; 
 }
 
 div.headgear_pg_div, div.bottoms_pg_div, div.footwear_pg_div {
@@ -196,18 +202,21 @@ div.headgear_info_div, div.top_info_div, div.outerwear_info_div, div.bottoms_inf
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: center;
+  /* align-items: center; */
 }
 
 h3.item_type {
   margin: auto;
+  margin-bottom: 20px;
 }
 
 h2.page_title{
   margin: auto;
 }
 
-
+.footwear_pg_div {
+  margin-top: 30px;
+}
 
 
 
@@ -220,4 +229,9 @@ h2.page_title{
 
 .for_logged_out_user {
   text-align: center;
+}
+
+.updating_outfit_buttons_div {
+  margin-left: 20px;
+  margin-bottom: 20px;
 }

@@ -117,3 +117,14 @@ ALTER TABLE "outfit" ADD "top_pg_url" CHAR(512);
 timestamp: 2018-12-08T15:20:31.203562
 ALTER TABLE "outfit" ADD "top_price" DOUBLE;
 success!
+timestamp: 2018-12-11T18:12:55.277615
+CREATE TABLE "web2py_session_Wishlist_Wardrobe"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "locked" CHAR(1),
+    "client_ip" CHAR(64),
+    "created_datetime" TIMESTAMP,
+    "modified_datetime" TIMESTAMP,
+    "unique_key" CHAR(64),
+    "session_data" BLOB
+);
+success!
